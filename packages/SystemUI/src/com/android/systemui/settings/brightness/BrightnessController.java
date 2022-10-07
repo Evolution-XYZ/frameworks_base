@@ -99,6 +99,7 @@ public class BrightnessController implements ToggleSlider.Listener, MirroredBrig
     private final DisplayTracker.Callback mBrightnessListener = new DisplayTracker.Callback() {
         @Override
         public void onDisplayChanged(int displayId) {
+            if (mUserChangedBrightness) return;
             mBackgroundHandler.post(mUpdateSliderRunnable);
         }
     };
@@ -112,6 +113,7 @@ public class BrightnessController implements ToggleSlider.Listener, MirroredBrig
     private float mBrightnessMax = PowerManager.BRIGHTNESS_MAX;
 
     private ValueAnimator mSliderAnimator;
+    private boolean mUserChangedBrightness;
 
     private final boolean mHasVibrator;
     private final Vibrator mVibrator;
@@ -396,6 +398,7 @@ public class BrightnessController implements ToggleSlider.Listener, MirroredBrig
                     BrightnessSynchronizer.brightnessFloatToInt(valFloat));
 
         }
+        mUserChangedBrightness = tracking && !stopTracking;
         setBrightness(valFloat);
         if (!tracking) {
             AsyncTask.execute(new Runnable() {
