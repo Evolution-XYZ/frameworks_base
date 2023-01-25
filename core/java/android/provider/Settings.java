@@ -6272,6 +6272,13 @@ public final class Settings {
         public static final String STATUSBAR_NOTIF_COUNT = "statusbar_notif_count";
 
         /**
+         * Give haptic feedback on qs brightness slider changes.
+         * @hide
+         */
+        @Readable
+        public static final String QS_BRIGHTNESS_SLIDER_HAPTIC_FEEDBACK = "qs_brightness_slider_haptic_feedback";
+
+        /**
          * Give haptic feedback on volume slider changes.
          * @hide
          */
