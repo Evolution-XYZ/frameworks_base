@@ -507,6 +507,9 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
 
     @Override
     public void onUiModeChanged() {
+        if (mDialog != null) {
+            mDialog.dismiss();
+        }
         mContext.getTheme().applyStyle(mContext.getThemeResId(), true);
         mConfigChanged = true;
     }
@@ -2820,7 +2823,11 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
 
     @Override
     public void onConfigChanged(Configuration config) {
+        if (mDialog != null) {
+            mDialog.dismiss();
+        }
         mOrientation = config.orientation;
+        mConfigChanged = true;
     }
 
     private final VolumeDialogController.Callbacks mControllerCallbackH
@@ -2851,7 +2858,9 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
 
         @Override
         public void onConfigurationChanged() {
-            mDialog.dismiss();
+            if (mDialog != null) {
+                mDialog.dismiss();
+            }
             mConfigChanged = true;
         }
 
