@@ -78,7 +78,11 @@ public class LensScreenshotReceiver extends BroadcastReceiver {
             share.putExtra(Intent.EXTRA_STREAM, uri);
             share.setPackage(ARPackageName);
             share.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            context.startActivity(share);
+            try {
+                context.startActivity(share);
+            } catch (Exception e) {
+                return;
+            }
         });
 
         if (intent.getBooleanExtra(EXTRA_SMART_ACTIONS_ENABLED, false)) {
